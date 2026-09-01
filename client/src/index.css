@@ -65,3 +65,13 @@ h1 em,h2 em { font-family:var(--serif); font-weight:500; letter-spacing:-.075em;
 .ad-example__bottom span { display:flex; align-items:center; gap:3px; padding:6px 8px; color:#f7f5ef; background:#1c1816; font-size:8px; }
 .about-note { max-width:470px; margin:28px 0 0; color:#612217; font-size:13px; line-height:1.5; }
 @media (max-width:760px) { .ad-example { width:64%; }.ad-example__photo { height:195px; }.platform-lockup { flex-wrap:wrap; margin-bottom:28px; } }
+
+/* Miras Tires case-study styling */
+.project-art--blue img { filter:saturate(.88) contrast(1.05); }
+.tire-proof { position:absolute; left:7%; bottom:8%; display:flex; flex-direction:column; min-width:210px; padding:15px 17px 14px; color:#102132; background:#f4c62c; box-shadow:0 13px 30px rgba(0,0,0,.28); transform:rotate(-4deg); }
+.tire-proof span { font:700 10px var(--mono); letter-spacing:.04em; text-transform:uppercase; }
+.tire-proof strong { margin-top:9px; font:600 61px/.8 var(--sans); letter-spacing:-.09em; }
+.tire-proof i { margin-top:8px; font:9px var(--mono); font-style:normal; letter-spacing:.03em; }
+.tire-proof b { margin-top:18px; padding-top:8px; border-top:1px solid rgba(16,33,50,.35); font:8px var(--mono); letter-spacing:.02em; }
+@media (max-width:760px) { .tire-proof { left:7%; bottom:8%; } }
+.project-art--blue img { object-fit:contain; background:#0c355b; }

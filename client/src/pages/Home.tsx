@@ -50,6 +50,17 @@ const projects = [
     tone: "slate",
     details: ["Brand system", "Lead capture", "Photo direction"],
   },
+  {
+    number: "04",
+    name: "Miras Tires",
+    discipline: "Family Business · Social Commerce",
+    statement: "A family business built to move Mongolia.",
+    description:
+      "Imported tires from Russia and China, turned into a trusted digital storefront for drivers across Ulaanbaatar and beyond.",
+    image: "/manus-storage/656812861_1677904003701589_6848981338977444365_n_08f5d15d.png",
+    tone: "blue",
+    details: ["11K Facebook followers", "$1M+ business", "Social commerce"],
+  },
 ];
 
 const gallery = [
@@ -96,6 +107,9 @@ function ProjectArt({ project }: { project: (typeof projects)[number] }) {
       )}
       {project.number === "03" && (
         <div className="auto-mark" aria-hidden="true"><span>AFTER</span><strong>HOURS</strong><i>DETAILING STUDIO</i></div>
+      )}
+      {project.number === "04" && (
+        <div className="tire-proof" aria-hidden="true"><span>MIКРАС TIRES</span><strong>11K+</strong><i>FACEBOOK FOLLOWERS</i><b>FAMILY BUSINESS / MONGOLIA</b></div>
       )}
       <div className="project-art__badge"><span>{project.number}</span><span>CASE STUDY</span></div>
     </div>
@@ -186,7 +200,7 @@ export default function Home() {
       </section>
 
       <section id="work" className="work-section" aria-labelledby="work-heading">
-        <div className="section-kicker"><span>01 — Selected work</span><span>{String(activeProject + 1).padStart(2, "0")} / 03</span></div>
+        <div className="section-kicker"><span>01 — Selected work</span><span>{String(activeProject + 1).padStart(2, "0")} / 04</span></div>
         <div className="work-intro"><h2 id="work-heading">Digital work with<br /><em>an aftertaste.</em></h2><p>Every project starts with the real-world moment that matters: a booking, a menu choice, a message, a sale.</p></div>
         <div className="case-stack">
           {projects.map((project, index) => (
