@@ -43,13 +43,24 @@ const projects = [
   },
   {
     number: "03",
+    name: "Afterhours Auto",
+    discipline: "Brand World · Lead Generation",
+    statement: "For a service built on reflection.",
+    description:
+      "A detail-first brand and lead flow for a detailing studio where every surface makes the case.",
+    image: "/manus-storage/detail-auto_6e78fac2.jpg",
+    tone: "slate",
+    details: ["Brand system", "Lead capture", "Photo direction"],
+  },
+  {
+    number: "04",
     name: "Miras Tires",
     discipline: "Family Business · Social Commerce",
     statement: "A family business built to move Mongolia.",
     description:
       "Imported tires from Russia and China, turned into a trusted digital storefront for drivers across Ulaanbaatar and beyond.",
-    image: "/manus-storage/656812861_1677904003701589_6848981338977444365_n_08f5d15d.png",
-    tone: "blue",
+    image: "/manus-storage/733975029_1761908731967782_325471598797480933_n_70945693.jpg",
+    tone: "tire",
     details: ["11K Facebook followers", "$1M+ business", "Social commerce"],
   },
 ];
@@ -97,7 +108,10 @@ function ProjectArt({ project }: { project: (typeof projects)[number] }) {
         </div>
       )}
       {project.number === "03" && (
-        <div className="tire-proof" aria-hidden="true"><span>MIКРАС TIRES</span><strong>11K+</strong><i>FACEBOOK FOLLOWERS</i><b>FAMILY BUSINESS / MONGOLIA</b></div>
+        <div className="auto-mark" aria-hidden="true"><span>AFTER</span><strong>HOURS</strong><i>DETAILING STUDIO</i></div>
+      )}
+      {project.number === "04" && (
+        <div className="tire-proof" aria-hidden="true"><span>MIRAS TIRES</span><strong>11K+</strong><i>FACEBOOK FOLLOWERS</i><b>FAMILY BUSINESS / MONGOLIA</b></div>
       )}
       <div className="project-art__badge"><span>{project.number}</span><span>CASE STUDY</span></div>
     </div>
@@ -190,7 +204,7 @@ export default function Home() {
       </section>
 
       <section id="work" className="work-section" aria-labelledby="work-heading">
-        <div className="section-kicker"><span>01 — Selected work</span><span>{String(activeProject + 1).padStart(2, "0")} / 03</span></div>
+        <div className="section-kicker"><span>01 — Selected work</span><span>{String(activeProject + 1).padStart(2, "0")} / 04</span></div>
         <div className="work-intro"><h2 id="work-heading">Digital work with<br /><em>an aftertaste.</em></h2><p>Every project starts with the real-world moment that matters: a booking, a menu choice, a message, a sale.</p></div>
         <div className="case-stack">
           {projects.map((project, index) => (
@@ -204,7 +218,7 @@ export default function Home() {
                 <button className="case-card__link" onClick={() => toast("Case-study details can be added as your client approvals arrive.")}><span>View direction</span><ArrowDownRight size={18} /></button>
                 {project.number === "01" && <div className="case-links"><a href="https://www.mantrachicago.com/" target="_blank" rel="noreferrer">Visit Mantra <ArrowUpRight size={13} /></a></div>}
                 {project.number === "02" && <div className="case-links"><a href="https://www.instagram.com/besbarmak_kazakh_restaurant/" target="_blank" rel="noreferrer"><Instagram size={13} /> Instagram</a><a href="https://www.facebook.com/BesbarmakKazakhRestaurant/" target="_blank" rel="noreferrer"><span className="facebook-letter">f</span> Facebook</a></div>}
-                {project.number === "03" && <div className="case-links"><a href="https://www.instagram.com/mirastires/" target="_blank" rel="noreferrer"><Instagram size={13} /> Instagram</a><a href="https://www.facebook.com/100044460162053/" target="_blank" rel="noreferrer"><span className="facebook-letter">f</span> Facebook</a></div>}
+                {project.number === "04" && <div className="case-links"><a href="https://www.instagram.com/mirastires/" target="_blank" rel="noreferrer"><Instagram size={13} /> Instagram</a><a href="https://www.facebook.com/100044460162053/" target="_blank" rel="noreferrer"><span className="facebook-letter">f</span> Facebook</a></div>}
               </div>
               <ProjectArt project={project} />
             </article>

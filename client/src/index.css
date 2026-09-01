@@ -82,3 +82,5 @@ h1 em,h2 em { font-family:var(--serif); font-weight:500; letter-spacing:-.075em;
 .case-links a { display:flex; align-items:center; gap:5px; padding:7px 9px; border:1px solid rgba(21,17,15,.3); border-radius:99px; color:var(--ink); font:9px var(--mono); text-decoration:none; text-transform:uppercase; transition:background .18s var(--ease), color .18s var(--ease), transform .18s var(--ease); }
 .case-links a:hover { color:var(--paper); background:var(--ink); transform:translateY(-2px); }
 .facebook-letter { font:600 14px/1 Arial,sans-serif; text-transform:none; }
+
+.project-art--tire img { object-fit:cover; filter:saturate(.78) contrast(1.06); }
