@@ -75,3 +75,5 @@ h1 em,h2 em { font-family:var(--serif); font-weight:500; letter-spacing:-.075em;
 .tire-proof b { margin-top:18px; padding-top:8px; border-top:1px solid rgba(16,33,50,.35); font:8px var(--mono); letter-spacing:.02em; }
 @media (max-width:760px) { .tire-proof { left:7%; bottom:8%; } }
 .project-art--blue img { object-fit:contain; background:#0c355b; }
+
+.footer__manage { color:var(--ink); text-decoration:none; }.footer__manage:hover { text-decoration:underline; }

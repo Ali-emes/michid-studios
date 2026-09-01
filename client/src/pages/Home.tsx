@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
+import { Link } from "wouter";
 
 const projects = [
   {
@@ -117,6 +119,8 @@ function ProjectArt({ project }: { project: (typeof projects)[number] }) {
 }
 
 export default function Home() {
+  const { data: uploadedGallery = [] } = trpc.gallery.list.useQuery();
+  const galleryItems = [...gallery, ...uploadedGallery.map((asset) => ({ src: asset.fileUrl, label: asset.title, span: "square" as const }))];
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeProject, setActiveProject] = useState(0);
@@ -229,7 +233,7 @@ export default function Home() {
         <div className="section-kicker"><span>02 — Visual language</span><span>Scroll / Tap to expand</span></div>
         <div className="gallery-intro"><h2 id="gallery-heading">The work<br />between the work.</h2><p>Photography, Canva posters, and visual systems that give everyday businesses a sharper point of view.</p></div>
         <div className="gallery-grid">
-          {gallery.map((item, index) => (
+          {galleryItems.map((item, index) => (
             <button className={`gallery-item gallery-item--${item.span}`} onClick={() => setLightbox(index)} key={item.label}>
               <img src={item.src} alt={item.label} /><div className="gallery-item__overlay"><span>{item.label}</span><ArrowUpRight size={20} /></div>
             </button>
@@ -275,11 +279,11 @@ export default function Home() {
             <button type="submit" className="submit-button"><span>Send project note</span><Send size={16} /></button>
           </form>
         </div>
-        <footer className="footer"><Logo /><div className="footer__socials"><button onClick={() => toast("Add your Instagram URL here before launch.")}><Instagram size={17} /> Instagram</button><button onClick={() => toast("Add your LinkedIn URL here before launch.")}><Linkedin size={17} /> LinkedIn</button></div><span>© {new Date().getFullYear()} MICHID Studios</span></footer>
+        <footer className="footer"><Logo /><div className="footer__socials"><button onClick={() => toast("Add your Instagram URL here before launch.")}><Instagram size={17} /> Instagram</button><button onClick={() => toast("Add your LinkedIn URL here before launch.")}><Linkedin size={17} /> LinkedIn</button><Link href="/manage" className="footer__manage">Owner access</Link></div><span>© {new Date().getFullYear()} MICHID MEDIA</span></footer>
       </section>
 
       <AnimatePresence>
-        {lightbox !== null && <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)}><button className="lightbox__close" onClick={() => setLightbox(null)} aria-label="Close image"><X size={21} /></button><motion.img src={gallery[lightbox].src} alt={gallery[lightbox].label} initial={{ scale: 0.96 }} animate={{ scale: 1 }} exit={{ scale: 0.96 }} onClick={(e) => e.stopPropagation()} /></motion.div>}
+        {lightbox !== null && <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)}><button className="lightbox__close" onClick={() => setLightbox(null)} aria-label="Close image"><X size={21} /></button><motion.img src={galleryItems[lightbox].src} alt={galleryItems[lightbox].label} initial={{ scale: 0.96 }} animate={{ scale: 1 }} exit={{ scale: 0.96 }} onClick={(e) => e.stopPropagation()} /></motion.div>}
       </AnimatePresence>
     </main>
   );
