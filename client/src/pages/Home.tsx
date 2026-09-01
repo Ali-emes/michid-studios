@@ -10,6 +10,7 @@ import {
   Linkedin,
   Menu,
   MoveDown,
+  Phone,
   Send,
   X,
 } from "lucide-react";
@@ -209,7 +210,7 @@ export default function Home() {
         <div className="case-stack">
           {projects.map((project, index) => (
             <article className="case-card" data-index={index} key={project.number} style={{ "--card-index": index } as React.CSSProperties}>
-              <div className="case-card__copy">
+              <div className="case-card__copy" style={{backgroundColor: '#ebf8ff'}}>
                 <div className="case-card__meta"><span>{project.number}</span><span>{project.discipline}</span></div>
                 <h3 style={{fontFamily: '"Times", sans-serif'}}>{project.name}</h3>
                 <p className="case-card__statement">{project.statement}</p>
@@ -282,7 +283,7 @@ export default function Home() {
             <button type="submit" className="submit-button"><span>Send project note</span><Send size={16} /></button>
           </form>
         </div>
-        <footer className="footer"><Logo /><div className="footer__socials"><button onClick={() => toast("Add your Instagram URL here before launch.")}><Instagram size={17} /> Instagram</button><button onClick={() => toast("Add your LinkedIn URL here before launch.")}><Linkedin size={17} /> LinkedIn</button><Link href="/manage" className="footer__manage">Owner access</Link></div><span>© {new Date().getFullYear()} MICHID MEDIA</span></footer>
+        <footer className="footer"><Logo /><div className="footer__socials"><button onClick={() => toast("Add your Instagram URL here before launch.")}><Instagram size={17} /> Instagram</button><button onClick={() => toast("Add your LinkedIn URL here before launch.")}><Linkedin size={17} /> LinkedIn</button><a href="tel:+13093502260" className="footer__contact"><Phone size={14} /> +1 309 350 2260</a><a href="https://www.instagram.com/ali_emes/" target="_blank" rel="noreferrer" className="footer__contact"><Instagram size={14} /> @ali_emes</a><Link href="/manage" className="footer__manage">Owner access</Link></div><span>© {new Date().getFullYear()} MICHID MEDIA</span></footer>
       </section>
 
       <AnimatePresence>

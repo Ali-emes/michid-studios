@@ -84,3 +84,6 @@ h1 em,h2 em { font-family:var(--serif); font-weight:500; letter-spacing:-.075em;
 .facebook-letter { font:600 14px/1 Arial,sans-serif; text-transform:none; }
 
 .project-art--tire img { object-fit:cover; filter:saturate(.78) contrast(1.06); }
+
+.footer__contact { display:flex; align-items:center; gap:6px; color:var(--ink); text-decoration:none; }.footer__contact:hover { text-decoration:underline; }.footer__manage { white-space:nowrap; }
+@media (max-width:760px) { .footer__socials { flex-wrap:wrap; gap:12px 17px; } }
