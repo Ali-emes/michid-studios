@@ -66,7 +66,7 @@ function scrollToSection(id: string) {
 function Logo() {
   return (
     <button className="wordmark" onClick={() => scrollToSection("top")} aria-label="Back to top">
-      MICHID<span>®</span>
+      MICHID <b>MEDIA</b><span>®</span>
     </button>
   );
 }
@@ -179,7 +179,7 @@ export default function Home() {
           Make the first<br /><em>impression</em> count.
         </motion.h1>
         <motion.div className="hero__bottom" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.62 }}>
-          <p>Websites, campaigns, and content systems<br />for local businesses with something to say.</p>
+          <p>Websites, campaigns, and content systems<br />for businesses with something to say.</p>
           <button className="scroll-prompt" onClick={() => scrollToSection("work")}><span>Explore selected work</span><MoveDown size={17} /></button>
         </motion.div>
         <div className="hero-orbit hero-orbit--one" /><div className="hero-orbit hero-orbit--two" /><div className="hero-sun" />
@@ -224,11 +224,16 @@ export default function Home() {
       </section>
 
       <section id="services" className="ads-section" aria-labelledby="ads-heading">
-        <div className="ads-section__visual"><img src="/manus-storage/ads-sculpture_7043b359.jpg" alt="Amber glass campaign styling" /><div className="ads-section__circle" /><span className="visual-caption">CAMPAIGN<br />STRUCTURE<br />IS CREATIVE.</span></div>
+        <div className="ads-section__visual"><img src="/manus-storage/ads-sculpture_7043b359.jpg" alt="Amber glass campaign styling" /><div className="ads-section__circle" /><span className="visual-caption">CAMPAIGN<br />STRUCTURE<br />IS CREATIVE.</span><div className="ad-example"><div className="ad-example__top"><span><span className="ad-avatar">M</span> MICHID MEDIA</span><span>Sponsored · · ·</span></div><div className="ad-example__photo"><span>YOUR<br />AD<br />HERE</span></div><div className="ad-example__bottom"><strong>Turn attention into action.</strong><span>Learn more <ArrowUpRight size={12} /></span></div></div></div>
         <div className="ads-section__copy">
-          <div className="section-kicker"><span>03 — Meta ads & marketing</span></div>
+          <div className="section-kicker"><span>03 — Meta ads & marketing</span><span>Meta · Facebook · Instagram</span></div>
           <h2 id="ads-heading">Make the<br /><em>offer</em> obvious.</h2>
-          <p>Campaigns built around attention, clarity, and an offer people can act on — not a dashboard full of noise.</p>
+          <p>Campaigns built around attention, clarity, and an offer people can act on — not a dashboard full of noise. Built for the way people discover businesses now.</p>
+          <div className="platform-lockup" aria-label="Meta, Facebook and Instagram platforms">
+            <span className="platform-mark platform-mark--meta">∞</span><span>Meta</span>
+            <span className="platform-mark platform-mark--facebook">f</span><span>Facebook</span>
+            <Instagram className="platform-mark platform-mark--instagram" size={17} /><span>Instagram</span>
+          </div>
           <div className="service-list">
             {[
               ["01", "Campaign structure", "A focused path from audience to action."],
@@ -248,7 +253,7 @@ export default function Home() {
       <section id="contact" className="contact-section" aria-labelledby="contact-heading">
         <div className="contact-section__top"><span>04 — Start a conversation</span><span>Available for select projects</span></div>
         <div className="contact-section__grid">
-          <div><h2 id="contact-heading">Your business<br />already has a story.<br /><em>Let’s sharpen it.</em></h2><a className="email-link" href="mailto:hello@michid.studio">hello@michid.studio <ArrowUpRight size={20} /></a></div>
+          <div><h2 id="contact-heading">Your business<br />already has a story.<br /><em>Let’s sharpen it.</em></h2><p className="about-note">MICHID means the Pleiades in Mongolian — a small constellation, a clear point of view. We’re a studio / media agency based in Mongolia, working between Kazakh and Mongolian cultures.</p><a className="email-link" href="mailto:hello@michid.studio">hello@michid.studio <ArrowUpRight size={20} /></a></div>
           <form onSubmit={submitContact} className="contact-form">
             <label>Your name<input required name="name" placeholder="How should I call you?" /></label>
             <label>Email address<input required type="email" name="email" placeholder="you@business.com" /></label>
