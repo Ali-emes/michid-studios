@@ -88,7 +88,7 @@ function ProjectArt({ project }: { project: (typeof projects)[number] }) {
       <img src={project.image} alt="" />
       <div className="project-art__shade" />
       {project.number === "01" && (
-        <div className="menu-window" aria-hidden="true">
+        <div className="menu-window" aria-hidden="true" style={{backgroundColor: '#ffbd61'}}>
           <div className="menu-window__top"><span>MANTRA</span><span>×</span></div>
           <div className="menu-window__content">
             <p>DINNER / CHICAGO</p>
@@ -100,7 +100,7 @@ function ProjectArt({ project }: { project: (typeof projects)[number] }) {
         </div>
       )}
       {project.number === "02" && (
-        <div className="social-window" aria-hidden="true">
+        <div className="social-window" aria-hidden="true" style={{backgroundColor: '#ffd5b3'}}>
           <div className="social-window__bar"><Circle size={8} fill="currentColor" /> <span>besbarmak.kazakh</span><b>Follow</b></div>
           <div className="social-window__body"><span>01</span><p>Traditional comfort.<br />A new conversation.</p><i>CHICAGO, IL</i></div>
         </div>
@@ -187,7 +187,7 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-heading">
         <div className="hero__grain" />
         <motion.div className="hero__eyebrow" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-          <span className="pulse" /> Independent digital studio · Chicago
+          <span className="pulse" /> Independent digital studio · Chicago · Mongolia
         </motion.div>
         <motion.h1 id="hero-heading" initial={{ opacity: 0, y: 36 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}>
           Make the first<br /><em>impression</em> count.
@@ -207,7 +207,7 @@ export default function Home() {
             <article className="case-card" data-index={index} key={project.number} style={{ "--card-index": index } as React.CSSProperties}>
               <div className="case-card__copy">
                 <div className="case-card__meta"><span>{project.number}</span><span>{project.discipline}</span></div>
-                <h3>{project.name}</h3>
+                <h3 style={{fontFamily: '"Times", sans-serif'}}>{project.name}</h3>
                 <p className="case-card__statement">{project.statement}</p>
                 <p className="case-card__description">{project.description}</p>
                 <div className="tag-row">{project.details.map((detail) => <span key={detail}>{detail}</span>)}</div>
