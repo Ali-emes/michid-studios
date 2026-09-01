@@ -1,7 +1,7 @@
 import { COOKIE_NAME } from "@shared/const";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { deleteGalleryAsset, getGalleryAssets, insertGalleryAsset } from "./db";
+import { deleteGalleryAsset, getGalleryAssets, insertGalleryAsset, reorderGalleryAssets } from "./db";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { adminProcedure } from "./_core/trpc";
 import { systemRouter } from "./_core/systemRouter";
@@ -37,6 +37,7 @@ export const appRouter = router({
           throw new TRPCError({ code: "BAD_REQUEST", message: "Images must be smaller than 8 MB." });
         }
         const safeName = input.fileName.replace(/[^a-zA-Z0-9._-]/g, "-").slice(-120) || "gallery-image";
+        const currentAssets = await getGalleryAssets();
         const stored = await storagePut(`gallery/${ctx.user.id}/${safeName}`, data, input.mimeType);
         return insertGalleryAsset({
           title: input.title,
@@ -44,9 +45,11 @@ export const appRouter = router({
           fileKey: stored.key,
           fileUrl: stored.url,
           mimeType: input.mimeType,
+          sortOrder: currentAssets.length,
           createdBy: ctx.user.id,
         });
       }),
+    reorder: adminProcedure.input(z.object({ ids: z.array(z.number().int().positive()).max(200) })).mutation(({ input }) => reorderGalleryAssets(input.ids)),
     remove: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(({ input }) => deleteGalleryAsset(input.id)),
   }),
 });

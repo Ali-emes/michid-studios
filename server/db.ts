@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { GalleryAsset, InsertGalleryAsset, InsertUser, galleryAssets, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
@@ -92,7 +92,7 @@ export async function getUserByOpenId(openId: string) {
 export async function getGalleryAssets(): Promise<GalleryAsset[]> {
   const db = await getDb();
   if (!db) return [];
-  return db.select().from(galleryAssets).orderBy(desc(galleryAssets.createdAt));
+  return db.select().from(galleryAssets).orderBy(asc(galleryAssets.sortOrder), desc(galleryAssets.createdAt));
 }
 
 export async function insertGalleryAsset(asset: InsertGalleryAsset): Promise<GalleryAsset> {
@@ -108,4 +108,15 @@ export async function deleteGalleryAsset(id: number): Promise<void> {
   const db = await getDb();
   if (!db) throw new Error("Database is not available");
   await db.delete(galleryAssets).where(eq(galleryAssets.id, id));
+}
+
+export async function reorderGalleryAssets(ids: number[]): Promise<void> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.transaction(async (tx) => {
+    for (let index = 0; index < ids.length; index += 1) {
+      const id = ids[index];
+      await tx.update(galleryAssets).set({ sortOrder: index }).where(eq(galleryAssets.id, id));
+    }
+  });
 }

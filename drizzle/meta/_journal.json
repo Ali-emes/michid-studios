@@ -8,6 +8,13 @@
       "when": 1788303325581,
       "tag": "0000_daily_mongu",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1788304335089,
+      "tag": "0001_complex_squirrel_girl",
+      "breakpoints": true
     }
   ]
 }

@@ -1,7 +1,7 @@
 import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
-import { ArrowLeft, Check, ImagePlus, LogOut, Trash2, Upload } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ArrowLeft, Check, GripVertical, ImagePlus, LogOut, Trash2, Upload } from "lucide-react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -31,10 +31,28 @@ export default function ManageGallery() {
     },
     onError: (error) => toast.error(error.message),
   });
+  const reorderMutation = trpc.gallery.reorder.useMutation({
+    onSuccess: () => {
+      void utils.gallery.list.invalidate();
+      toast.success("Gallery order saved.");
+    },
+    onError: (error) => {
+      setDragOrder(null);
+      toast.error(error.message);
+    },
+  });
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [altText, setAltText] = useState("");
+  const [dragOrder, setDragOrder] = useState<number[] | null>(null);
+  const [draggedId, setDraggedId] = useState<number | null>(null);
+  const assets = assetsQuery.data ?? [];
+  const orderedAssets = dragOrder ? dragOrder.map((id) => assets.find((asset) => asset.id === id)).filter((asset): asset is (typeof assets)[number] => Boolean(asset)) : assets;
+
+  useEffect(() => {
+    setDragOrder(null);
+  }, [assetsQuery.data]);
 
   const pickFile = (event: ChangeEvent<HTMLInputElement>) => {
     const nextFile = event.target.files?.[0];
@@ -73,6 +91,23 @@ export default function ManageGallery() {
     });
   };
 
+  const moveAsset = (targetId: number) => {
+    if (draggedId === null || draggedId === targetId) return;
+    const currentIds = orderedAssets.map((asset) => asset.id);
+    const from = currentIds.indexOf(draggedId);
+    const to = currentIds.indexOf(targetId);
+    if (from < 0 || to < 0) return;
+    currentIds.splice(from, 1);
+    currentIds.splice(to, 0, draggedId);
+    setDragOrder(currentIds);
+  };
+
+  const finishReorder = () => {
+    if (!dragOrder) return;
+    reorderMutation.mutate({ ids: orderedAssets.map((asset) => asset.id) });
+    setDraggedId(null);
+  };
+
   if (loading) return <div className="manage-page manage-page--center">Loading studio access…</div>;
   if (!isAuthenticated) return <div className="manage-page manage-page--center"><div className="manage-gate"><span className="manage-kicker">MICHID MEDIA / PRIVATE</span><h1>Manage your<br /><em>gallery.</em></h1><p>Sign in with the owner account to add and manage portfolio images.</p><button className="manage-button" onClick={() => startLogin()}>Sign in to continue <ArrowLeft size={16} /></button><Link href="/" className="manage-back">Back to website</Link></div></div>;
   if (user?.role !== "admin") return <div className="manage-page manage-page--center"><div className="manage-gate"><span className="manage-kicker">MICHID MEDIA / PRIVATE</span><h1>Access<br /><em>restricted.</em></h1><p>This area is available to the studio owner account only.</p><button className="manage-button" onClick={() => void logout()}>Sign out <LogOut size={16} /></button><Link href="/" className="manage-back">Back to website</Link></div></div>;
@@ -89,7 +124,7 @@ export default function ManageGallery() {
           <button className="manage-button manage-button--wide" type="submit" disabled={uploadMutation.isPending}>{uploadMutation.isPending ? "Uploading…" : <><Upload size={16} /> Upload to gallery</>}</button>
           {uploadMutation.isSuccess && <p className="upload-success"><Check size={14} /> Stored securely in File Storage</p>}
         </form>
-        <section className="asset-list"><div className="asset-list__head"><span>Your uploaded assets</span><span>{assetsQuery.data?.length ?? 0} files</span></div>{assetsQuery.isLoading ? <p className="asset-empty">Loading assets…</p> : assetsQuery.data?.length ? assetsQuery.data.map((asset) => <div className="asset-row" key={asset.id}><img src={asset.fileUrl} alt={asset.altText} /><div><strong>{asset.title}</strong><span>{asset.altText}</span></div><button onClick={() => removeMutation.mutate({ id: asset.id })} aria-label={`Remove ${asset.title}`}><Trash2 size={16} /></button></div>) : <div className="asset-empty">Your uploads will appear here.<br />The existing curated images remain in the public gallery.</div>}</section>
+        <section className="asset-list"><div className="asset-list__head"><span>Your uploaded assets</span><span>{assets.length} files · drag to reorder</span></div>{assetsQuery.isLoading ? <p className="asset-empty">Loading assets…</p> : orderedAssets.length ? orderedAssets.map((asset) => <div className={`asset-row ${draggedId === asset.id ? "asset-row--dragging" : ""}`} key={asset.id} draggable onDragStart={() => setDraggedId(asset.id)} onDragOver={(event) => { event.preventDefault(); moveAsset(asset.id); }} onDrop={finishReorder} onDragEnd={() => setDraggedId(null)}><button className="asset-row__handle" aria-label={`Drag ${asset.title} to reorder`}><GripVertical size={16} /></button><img src={asset.fileUrl} alt={asset.altText} /><div><strong>{asset.title}</strong><span>{asset.altText}</span></div><button onClick={() => removeMutation.mutate({ id: asset.id })} aria-label={`Remove ${asset.title}`}><Trash2 size={16} /></button></div>) : <div className="asset-empty">Your uploads will appear here.<br />The existing curated images remain in the public gallery.</div>}</section>
       </div>
     </main>
   </div>;

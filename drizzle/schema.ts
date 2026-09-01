@@ -32,6 +32,7 @@ export const galleryAssets = mysqlTable("gallery_assets", {
   fileKey: varchar("fileKey", { length: 512 }).notNull().unique(),
   fileUrl: varchar("fileUrl", { length: 1024 }).notNull(),
   mimeType: varchar("mimeType", { length: 64 }).notNull(),
+  sortOrder: int("sortOrder").default(0).notNull(),
   createdBy: int("createdBy").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
