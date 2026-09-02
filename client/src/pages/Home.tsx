@@ -210,7 +210,7 @@ export default function Home() {
         <div className="case-stack">
           {projects.map((project, index) => (
             <article className="case-card" data-index={index} key={project.number} style={{ "--card-index": index } as React.CSSProperties}>
-              <div className="case-card__copy" style={{backgroundColor: '#ebf8ff'}}>
+              <div className="case-card__copy" style={{backgroundColor: '#000000'}}>
                 <div className="case-card__meta"><span>{project.number}</span><span>{project.discipline}</span></div>
                 <h3 style={{fontFamily: '"Times", sans-serif'}}>{project.name}</h3>
                 <p className="case-card__statement">{project.statement}</p>
