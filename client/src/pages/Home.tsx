@@ -10,6 +10,7 @@ import {
   Linkedin,
   Menu,
   MoveDown,
+  Phone,
   Send,
   X,
 } from "lucide-react";
@@ -282,7 +283,7 @@ export default function Home() {
             <button type="submit" className="submit-button"><span>Send project note</span><Send size={16} /></button>
           </form>
         </div>
-        <footer className="footer"><Logo /><div className="footer__socials"><button onClick={() => toast("Add your Instagram URL here before launch.")}><Instagram size={17} /> Instagram</button><button onClick={() => toast("Add your LinkedIn URL here before launch.")}><Linkedin size={17} /> LinkedIn</button><Link href="/manage" className="footer__manage">Owner access</Link></div><span>© {new Date().getFullYear()} MICHID MEDIA</span></footer>
+        <footer className="footer"><Logo /><div className="footer__socials"><button onClick={() => toast("Add your Instagram URL here before launch.")}><Instagram size={17} /> Instagram</button><button onClick={() => toast("Add your LinkedIn URL here before launch.")}><Linkedin size={17} /> LinkedIn</button><a href="tel:+13093502260" className="footer__contact"><Phone size={14} /> +1 309 350 2260</a><a href="https://www.instagram.com/ali_emes/" target="_blank" rel="noreferrer" className="footer__contact"><Instagram size={14} /> @ali_emes</a><Link href="/manage" className="footer__manage">Owner access</Link></div><span>© {new Date().getFullYear()} MICHID MEDIA</span></footer>
       </section>
 
       <AnimatePresence>
