@@ -7,11 +7,11 @@ import Home from "./pages/Home";
 import ManageGallery from "./pages/ManageGallery";
 import NotFound from "./pages/NotFound";
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/manage" component={ManageGallery} />
+      <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -20,9 +20,9 @@ function Router() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
-          <Toaster theme="dark" position="bottom-right" />
+          <Toaster />
           <Router />
         </TooltipProvider>
       </ThemeProvider>
