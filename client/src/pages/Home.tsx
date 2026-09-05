@@ -75,8 +75,8 @@ const gallery = [
 
 const capabilities: { number: string; title: string; copy: string; Icon: LucideIcon }[] = [
   { number: "01", title: "Digital menus + QR / NFC", copy: "A menu guests can actually use, and a system you can update without reprinting.", Icon: Nfc },
-  { number: "02", title: "Website design", copy: "Fast, mobile-first sites that make the next step obvious — book, order, call, or visit.", Icon: Globe2 },
-  { number: "03", title: "Photography + video", copy: "Food, drinks, rooms, people, and short-form edits captured to be used, not shelved.", Icon: Camera },
+  { number: "02", title: "Websites + booking flows", copy: "Fast, mobile-first sites that make the next step obvious — book, order, call, or visit.", Icon: Globe2 },
+  { number: "03", title: "Photography + short-form video", copy: "Food, drinks, rooms, people, and edits captured to be used, not shelved.", Icon: Camera },
   { number: "04", title: "Graphic design + branding", copy: "Posters, menus, and brand systems that make everyday touchpoints feel like one world.", Icon: PenTool },
   { number: "05", title: "Social + ad management", copy: "A clear content rhythm and focused Meta campaigns, reported in plain language.", Icon: Megaphone },
 ];
@@ -217,8 +217,8 @@ export default function Home() {
         <Logo />
         <nav className="nav__links" aria-label="Primary navigation">
           <button onClick={() => scrollToSection("work")}>Work</button>
-          <button onClick={() => scrollToSection("services")}>Capabilities</button>
-          <button onClick={() => scrollToSection("offers")}>Offers</button>
+          <button onClick={() => scrollToSection("services")}>Services</button>
+          <button onClick={() => scrollToSection("offers")}>Menu</button>
           <button onClick={() => scrollToSection("contact")}>Contact</button>
         </nav>
         <button className="nav__cta" onClick={() => scrollToSection("contact")}><span>Start a project</span><ArrowUpRight size={15} /></button>
@@ -229,8 +229,8 @@ export default function Home() {
         {menuOpen && (
           <motion.div className="mobile-menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className="mobile-menu__head"><Logo /><button onClick={() => setMenuOpen(false)} aria-label="Close menu"><X size={24} /></button></div>
-            {["Work", "Capabilities", "Offers", "Contact"].map((item) => (
-              <button key={item} onClick={() => { scrollToSection(item === "Capabilities" ? "services" : item.toLowerCase()); setMenuOpen(false); }}>{item}<ArrowUpRight size={20} /></button>
+            {["Work", "Services", "Menu", "Contact"].map((item) => (
+              <button key={item} onClick={() => { scrollToSection(item === "Services" ? "services" : item === "Menu" ? "offers" : item.toLowerCase()); setMenuOpen(false); }}>{item}<ArrowUpRight size={20} /></button>
             ))}
           </motion.div>
         )}
@@ -299,7 +299,7 @@ export default function Home() {
       </section>
 
       <section id="services" className="services-section" aria-labelledby="services-heading">
-        <div className="services-section__head"><div><div className="section-kicker"><span>03 — Capabilities</span><span>Built around the business</span></div><h2 id="services-heading">Not more noise.<br /><em>More signal.</em></h2></div><p>One studio for the pieces that shape how a customer finds you, understands you, and decides to act.</p></div>
+        <div className="services-section__head"><div><div className="section-kicker"><span>03 — Services</span><span>Built around the business</span></div><h2 id="services-heading">Not more noise.<br /><em>More signal.</em></h2></div><p>One studio for the pieces that shape how a customer finds you, understands you, and decides to act.</p></div>
         <div className="capability-grid">
           {capabilities.map(({ number, title, copy, Icon }) => (
             <article className="capability-card" key={number}><div className="capability-card__top"><span>{number}</span><Icon size={20} strokeWidth={1.5} /></div><h3>{title}</h3><p>{copy}</p></article>
@@ -309,7 +309,7 @@ export default function Home() {
       </section>
 
       <section className="process-section" aria-labelledby="process-heading">
-        <div className="process-section__intro"><span className="section-label">04 — How we work</span><h2 id="process-heading">A clear path<br /><em>from idea to action.</em></h2><p>No template shop, no black box. We make the work visible, test it on a real phone, and keep the next move clear.</p></div>
+        <div className="process-section__intro"><span className="section-label">04 — Process</span><h2 id="process-heading">A clear path<br /><em>from idea to action.</em></h2><p>No template shop, no black box. We make the work visible, test it on a real phone, and keep the next move clear.</p></div>
         <div className="process-list">
           {["Discover", "Design", "Launch", "Grow"].map((step, index) => (
             <div className="process-step" key={step}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{step}</h3><p>{["A short conversation about the business, the customer, and what is not working online today.", "Menu, content, or ad creative gets built around the brand — nothing generic, nothing off the shelf.", "The new digital menu, site, or campaign goes live, tested on an actual phone before anything ships.", "Ongoing content and ad performance get reviewed and adjusted every month, not left on autopilot."][index]}</p></div><ArrowUpRight size={18} /></div>
@@ -319,7 +319,7 @@ export default function Home() {
       </section>
 
       <section id="offers" className="offers-section" aria-labelledby="offers-heading">
-        <div className="section-kicker"><span>05 — Starting points</span><span>No add-on maze</span></div>
+        <div className="section-kicker"><span>05 — Menu</span><span>No add-on maze</span></div>
         <div className="offers-intro"><div><span className="eyebrow-dark">Simple enough to decide on the spot.</span><h2 id="offers-heading">Choose your<br /><em>next course.</em></h2></div><div><p>Three straightforward ways to get moving. Every business is different, so each plan can be shaped around the real need and the budget.</p><button className="download-link" onClick={downloadGuide}>Download starting points <Download size={16} /></button></div></div>
         <div className="offers-grid">
           {offers.map((offer) => (
